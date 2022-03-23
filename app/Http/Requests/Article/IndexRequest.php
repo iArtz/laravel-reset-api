@@ -25,6 +25,7 @@ class IndexRequest extends FormRequest
     {
         return [
             'tag'    => 'sometimes|string',
+            'author' => 'sometimes|string',
             'limit'  => 'sometimes|integet',
             'offset' => 'sometimes|integer',
         ];

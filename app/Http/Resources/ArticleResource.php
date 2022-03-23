@@ -16,9 +16,14 @@ class ArticleResource extends JsonResource
     public function toArray($request): array
     {
         return [
-            'slug'    => $this->slug,
-            'title'   => $this->title,
-            'tagList' => $this->tags->pluck('name'),
+            'slug'      => $this->slug,
+            'title'     => $this->title,
+            'tagList'   => $this->tags->pluck('name'),
+            'createdAt' => $this->created_at,
+            'updatedAt' => $this->updated_at,
+            'author'    => [
+                'name' => $this->user->name,
+            ],
         ];
     }
 }
