@@ -19,8 +19,8 @@ class ArticleResource extends JsonResource
             'slug'      => $this->slug,
             'title'     => $this->title,
             'tagList'   => $this->tags->pluck('name'),
-            'createdAt' => $this->created_at,
-            'updatedAt' => $this->updated_at,
+            'createdAt' => $this->created_at->format('Y-m-d H:i:s'),
+            'updatedAt' => $this->updated_at->format('Y-m-d H:i:s'),
             'author'    => [
                 'name' => $this->user->name,
             ],
