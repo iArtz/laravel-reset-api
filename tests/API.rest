@@ -1,0 +1,68 @@
+@host = http://127.0.0.1:8000/api
+
+# @name Register
+POST {{host}}/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "user": {
+        "name": "Tester",
+        "email": "test@test.test",
+        "password": "password"
+    }
+}
+###
+# @name GetUser
+GET {{host}}/user HTTP/1.1
+Authorization: Bearer {{Register.response.body.user.token}}
+###
+# @name Login
+POST {{host}}/users/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "user": {
+        "email": "test@test.test",
+        "password": "password"
+    }
+}
+###
+# @name CreateArticle
+POST {{host}}/articles HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{Login.response.body.user.token}}
+
+{
+    "article": {
+        "title": "New Article"
+    }
+}
+###
+# @name getAllArticles
+GET {{host}}/articles HTTP/1.1
+###
+# @name getArticleBySlug
+GET {{host}}/articles/new-article HTTP/1.1
+###
+# @name UpdateArticleBySlug
+PATCH {{host}}/articles/new-article HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{Login.response.body.user.token}}
+
+{
+    "article": {
+        "title": "Update Article",
+        "tagList": [
+            "qui",
+            "New"
+        ]
+    }
+}
+###
+# @name DeleteArticleBySlug
+DELETE {{host}}/articles/update-article HTTP/1.1
+Authorization: Bearer {{Login.response.body.user.token}}
+###
+# @name GetTags
+GET {{host}}/tags HTTP/1.1
+###
